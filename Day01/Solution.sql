@@ -17,7 +17,7 @@ end as workshop_assignment
 from children c
      join wish_lists wl on wl.child_id = c.child_id
      join toy_catalogue tc on tc.toy_name = wl.wishes ->> 'first_choice'
-order by c.name desc
+order by c.name
 limit 5
 ;
 
