@@ -1,0 +1,23 @@
+with entries as (select toy_id, toy_name,
+                 (select array_agg(e order by id desc)
+                  FROM unnest(new_tags) with ordinality as s1(e, id)
+                  WHERE not exists
+                  (SELECT 1
+                   FROM unnest(previous_tags) as s2(e)
+                   where s2.e = s1.e)) as added_tags,
+                 ARRAY(SELECT * FROM UNNEST(previous_tags) WHERE UNNEST = ANY (new_tags)) as unchanged_tags,
+                 (select array_agg(e order by id desc)
+                  FROM unnest(previous_tags) with ordinality as s1(e, id)
+                  WHERE not exists
+                  (SELECT 1
+                   FROM unnest(new_tags) as s2(e)
+                   where s2.e = s1.e)) as removed_tags
+                 from toy_production),
+lengths as (select *, array_length(added_tags, 1) as len_added_tags,
+            array_length(unchanged_tags, 1) as len_unchanged_tags, array_length(removed_tags, 1) as len_removed_tags
+            from entries)
+select *
+from lengths
+where added_tags is not null
+order by lengths.len_added_tags desc
+;
