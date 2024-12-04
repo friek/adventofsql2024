@@ -1,27 +1,27 @@
-with entries as (select toy_id,
+WITH entries as (SELECT toy_id,
                         toy_name,
-                        (select array_agg(e)
-                         FROM unnest(new_tags) with ordinality as s1(e, id)
-                         WHERE not exists
+                        (SELECT array_agg(e)
+                         FROM unnest(new_tags) WITH ORDINALITY AS s1(e, id)
+                         WHERE NOT EXISTS
                                    (SELECT 1
                                     FROM unnest(previous_tags) as s2(e)
-                                    where s2.e = s1.e))                                          as added_tags,
-                        ARRAY(SELECT * FROM UNNEST(previous_tags) WHERE UNNEST = ANY (new_tags)) as unchanged_tags,
-                        (select array_agg(e)
+                                    where s2.e = s1.e))                                          AS added_tags,
+                        ARRAY(SELECT * FROM UNNEST(previous_tags) WHERE UNNEST = ANY (new_tags)) AS unchanged_tags,
+                        (SELECT array_agg(e)
                          FROM unnest(previous_tags) with ordinality as s1(e, id)
-                         WHERE not exists
-                                       (SELECT 1 FROM unnest(new_tags) as s2(e) where s2.e = s1.e))
-                                                                                                 as removed_tags
-                 from toy_production),
-     lengths as (select *,
-                        array_length(added_tags, 1)     as len_added_tags,
-                        array_length(unchanged_tags, 1) as len_unchanged_tags,
-                        array_length(removed_tags, 1)   as len_removed_tags
-                 from entries)
-select toy_id, toy_name, len_added_tags, len_unchanged_tags, len_removed_tags
-from lengths
-order by lengths.len_added_tags desc nulls last
-limit 1
+                         WHERE NOT EXISTS
+                                       (SELECT 1 FROM unnest(new_tags) AS s2(e) WHERE s2.e = s1.e))
+                                                                                                 AS removed_tags
+                 FROM toy_production),
+     lengths AS (SELECT *,
+                        coalesce(array_length(added_tags, 1), 0)     AS len_added_tags,
+                        coalesce(array_length(unchanged_tags, 1), 0) AS len_unchanged_tags,
+                        coalesce(array_length(removed_tags, 1), 0)   AS len_removed_tags
+                 FROM entries)
+SELECT toy_id, toy_name, len_added_tags, len_unchanged_tags, len_removed_tags
+FROM lengths
+ORDER BY lengths.len_added_tags DESC NULLS LAST
+LIMIT 1
 ;
 
 -- Better solution from https://www.reddit.com/r/adventofsql/comments/1h62b9e/comment/m0cd9bn/
