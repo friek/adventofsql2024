@@ -1,6 +1,5 @@
 -- Complex solution
-with average_price as (select avg(price) as avg_gift_price
-                       from gifts),
+with average_price as (select avg(price) as avg_gift_price from gifts),
      above_average as (select c.name as child_name, g.name as gift_name, g.price as gift_price
                        from average_price,
                             children c
