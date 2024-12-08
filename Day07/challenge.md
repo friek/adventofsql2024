@@ -9,11 +9,12 @@ pair is only listed once (no duplicates where Elf1/Elf2 are reversed) and that e
 
 ```sql
 DROP TABLE workshop_elves CASCADE;
-CREATE TABLE workshop_elves (
-elf_id SERIAL PRIMARY KEY,
-elf_name VARCHAR(100) NOT NULL,
-primary_skill VARCHAR(50) NOT NULL,
-years_experience INTEGER NOT NULL
+CREATE TABLE workshop_elves
+(
+    elf_id           SERIAL PRIMARY KEY,
+    elf_name         VARCHAR(100) NOT NULL,
+    primary_skill    VARCHAR(50)  NOT NULL,
+    years_experience INTEGER      NOT NULL
 );
 ```
 
@@ -22,12 +23,12 @@ years_experience INTEGER NOT NULL
 ```sql
 INSERT INTO workshop_elves (elf_name, primary_skill, years_experience)
 VALUES ('Tinker', 'Toy Making', 150),
-('Sparkle', 'Gift Wrapping', 75),
-('Twinkle', 'Toy Making', 90),
-('Holly', 'Cookie Baking', 200),
-('Jolly', 'Gift Wrapping', 85),
-('Berry', 'Cookie Baking', 120),
-('Star', 'Toy Making', 95);
+       ('Sparkle', 'Gift Wrapping', 75),
+       ('Twinkle', 'Toy Making', 90),
+       ('Holly', 'Cookie Baking', 200),
+       ('Jolly', 'Gift Wrapping', 85),
+       ('Berry', 'Cookie Baking', 120),
+       ('Star', 'Toy Making', 95);
 ```
 
 ### Expected output
@@ -51,12 +52,14 @@ elf_1_id | elf_2_id | shared_skill
 ## The challenge 🎁
 
 Create a query that returns pairs of elves who share the same primary_skill. The pairs should be comprised of the elf
-with the most and least years of experience in the primary_skill.
+with the `most (max)` and `least (min`) years of experience in the primary_skill.
+
+When you have multiple elves with the same years_experience, order the elves by elf_id in ascending order.
 
 Your query should return:
 
-* The ID of the first elf in the pair
-* The ID of the second elf in the pair
+* The ID of the first elf with the Max years experience
+* The ID of the first elf with the Min years experience
 * Their shared skill
 
 Notes:
