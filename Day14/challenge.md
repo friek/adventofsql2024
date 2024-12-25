@@ -6,7 +6,8 @@ everywhere. His precious green suit - the one he wanted to surprise everyone wit
 Claus stands in the doorway, pinching the bridge of her nose. "Nicholas, dear, I've told you three times - it's at the
 dry cleaners. I dropped it off myself." But Santa's too far gone, muttering about filing systems and color-coding as he
 disappears beneath another avalanche of receipts.
-Context:
+
+### Context
 
 Santa's personal assistant maintains a digital record of all his dry cleaning receipts. Each receipt is stored as a JSON
 object in an array, containing details about each garment cleaned, including: receipt ID garment type color cleaning
