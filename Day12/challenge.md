@@ -15,12 +15,13 @@ With this new ranking system in place, Santa felt confident he could better unde
 happiness to children worldwide.
 
 ### Example schema
+
 ```sql
 DROP TABLE gifts CASCADE;
 CREATE TABLE gifts (
 gift_id INT PRIMARY KEY,
 gift_name VARCHAR(100) NOT NULL,
-price DECIMAL(10,2)
+price DECIMAL(10, 2)
 );
 DROP TABLE gift_requests CASCADE;
 CREATE TABLE gift_requests (
@@ -32,15 +33,16 @@ FOREIGN KEY (gift_id) REFERENCES Gifts(gift_id)
 ```
 
 ### Example data
+
 ```sql
-INSERT INTO gifts VALUES 
-(1, 'Robot Kit', 89.99),
+INSERT INTO gifts
+VALUES (1, 'Robot Kit', 89.99),
 (2, 'Smart Watch', 149.99),
 (3, 'Teddy', 199.99),
 (4, 'Hat', 59.99);
 
-INSERT INTO gift_requests VALUES
-(1, 1, '2024-12-25'),
+INSERT INTO gift_requests
+VALUES (1, 1, '2024-12-25'),
 (2, 1, '2024-12-25'),
 (3, 1, '2024-12-25'),
 (4, 2, '2024-12-25'),
@@ -58,6 +60,7 @@ INSERT INTO gift_requests VALUES
 ```
 
 ### Example result
+
 ```
   gift_name  | overall_rank 
 -------------+--------------
@@ -68,6 +71,7 @@ INSERT INTO gift_requests VALUES
 ```
 
 ### Example to submit
+
 ```
 Teddy
 ```
@@ -75,3 +79,11 @@ Teddy
 ```
 0.67
 ```
+
+## The challenge 🎁
+
+Find the toy with the second highest percentile of requests. Submit the name of the toy and the percentile value.
+
+If there are multiple values, choose the first occurrence.
+
+Order by percentile descending, then gift name ascending.

@@ -11,12 +11,11 @@ patterns is crucial for maintaining the magic of Christmas in homes across the g
 ### Example Schema
 
 ```sql
-CREATE TABLE TreeHarvests
-(
-    field_name      VARCHAR(50),
-    harvest_year    INT,
-    season          VARCHAR(6),
-    trees_harvested INT
+CREATE TABLE TreeHarvests (
+field_name VARCHAR(50),
+harvest_year INT,
+season VARCHAR(6),
+trees_harvested INT
 );
 ```
 
@@ -25,13 +24,13 @@ CREATE TABLE TreeHarvests
 ```sql
 INSERT INTO TreeHarvests
 VALUES ('Rudolph Ridge', 2023, 'Spring', 150),
-       ('Rudolph Ridge', 2023, 'Summer', 180),
-       ('Rudolph Ridge', 2023, 'Fall', 220),
-       ('Rudolph Ridge', 2023, 'Winter', 300),
-       ('Dasher Dell', 2023, 'Spring', 165),
-       ('Dasher Dell', 2023, 'Summer', 195),
-       ('Dasher Dell', 2023, 'Fall', 210),
-       ('Dasher Dell', 2023, 'Winter', 285);
+('Rudolph Ridge', 2023, 'Summer', 180),
+('Rudolph Ridge', 2023, 'Fall', 220),
+('Rudolph Ridge', 2023, 'Winter', 300),
+('Dasher Dell', 2023, 'Spring', 165),
+('Dasher Dell', 2023, 'Summer', 195),
+('Dasher Dell', 2023, 'Fall', 210),
+('Dasher Dell', 2023, 'Winter', 285);
 ```
 
 ### Example Result
@@ -54,3 +53,23 @@ Example submission:
 ```
 233.33
 ```
+
+## The challenge 🎁
+
+Mrs. Claus needs a comprehensive analysis of the tree farms. Using window functions, create a query that will shed some
+light on the field perfomance.
+
+**Show the 3-season moving average per field per season per year**
+
+Write a single SQL query using window functions that will reveal these vital patterns. Your analysis will help ensure
+that every child who wishes for a Christmas tree will have one for years to come.
+
+Order them by three_season_moving_avg descending to make it easier to find the largest figure.
+
+Seasons are ordered as follows:  
+* Spring THEN 1
+* Summer THEN 2
+* Fall THEN 3
+* Winter THEN 4
+
+Find the row with the most `three_season_moving_avg`
