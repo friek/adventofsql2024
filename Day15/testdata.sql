@@ -1,3 +1,6 @@
+-- This challenge uses postgis
+CREATE EXTENSION IF NOT EXISTS postgis;
+
 DROP TABLE IF EXISTS sleigh_locations;
 CREATE TABLE sleigh_locations (
     id SERIAL PRIMARY KEY,
