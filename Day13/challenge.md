@@ -65,3 +65,9 @@ VALUES ('Santa Claus',
 
 ```workshop.net```
 ```northpole.com```
+
+## The challenge 🎁
+
+Create a list of all the domains that exist in the contacts list emails.
+
+Submit the domain names with the most emails.
