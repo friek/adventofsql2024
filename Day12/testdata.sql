@@ -1,4 +1,4 @@
-DROP TABLE gifts CASCADE;
+DROP TABLE IF EXISTS gifts CASCADE;
 CREATE TABLE gifts
 (
     gift_id   INT PRIMARY KEY,
@@ -6,7 +6,7 @@ CREATE TABLE gifts
     price     DECIMAL(10, 2)
 );
 
-DROP TABLE gift_requests CASCADE;
+DROP TABLE IF EXISTS gift_requests CASCADE;
 CREATE TABLE gift_requests
 (
     request_id   INT PRIMARY KEY,
